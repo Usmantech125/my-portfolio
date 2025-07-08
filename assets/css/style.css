@@ -334,22 +334,23 @@ main {
   gap: 15px;
 }
 
+/* Main avatar container */
 .avatar-box {
-  display: flex;              /* 👈 Better centering */
-  justify-content: center;    /* 👈 Horizontally center */
-  align-items: center;        /* 👈 Vertically center if needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 150px;           /* 👈 Limit size on large screens */
-  margin: 0 auto;             /* 👈 Center inside container */
+  max-width: 150px;  /* Control size on larger screens */
+  margin: 0 auto;     /* Center inside sidebar */
 }
 
-
+/* Avatar image inside container */
 .avatar-image {
-  width: 100%;                /* 👈 Make it scale with container */
-  height: auto;               /* 👈 Maintain aspect ratio */
+  width: 100%;
+  height: auto;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ccc;
@@ -1898,11 +1899,14 @@ textarea.form-input::-webkit-resizer { display: none; }
     gap: 25px;
   }
 
+
+
   .main-content {
-    min-width: 75%;
-    width: 75%;
-    margin: 0;
+    width: 100%;             /* 👈 Full width on small screens */
+    min-width: auto;
   }
+
+  
 
 
 
