@@ -336,14 +336,20 @@ main {
 
 .avatar-box {
   display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;         /* 👈 Crop overflow outside circle */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
 }
+
 
 .avatar-image {
   width: 130px;
   height: 130px;
-  border-radius: 45%;
-  object-fit: cover;
+  border-radius: 50%;       /* 👈 Makes it a perfect circle */
+  object-fit: cover;        /* 👈 Keeps image inside without stretching */
+  border: 2px solid #ccc;   /* Optional: adds a visible border around */
 }
+
 
 .info-content .name {
   color: var(--white-2);

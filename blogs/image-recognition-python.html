@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="Usman Fayyaz">
+  <meta name="description" content="Learn how to get started with image recognition using Python and libraries like OpenCV and TensorFlow.">
+  <title>Getting Started with Image Recognition in Python</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 2.4rem;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      color: #34495e;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 25px;
+    }
+
+    p, li {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    code {
+      background: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background: #f7f7f7;
+      padding: 15px;
+      border-left: 4px solid #3498db;
+      overflow-x: auto;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-style: italic;
+      color: #777;
+    }
+
+    .author {
+      margin-top: 40px;
+      font-weight: bold;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Getting Started with Image Recognition in Python</h1>
+    <p><strong>Author:</strong> Usman Fayyaz | <strong>Date:</strong> July 8, 2025</p>
+
+    <p>
+      Image recognition is one of the most exciting fields in computer vision and artificial intelligence. With Python, developers have access to powerful libraries like OpenCV, TensorFlow, and Keras that make it easier to build image-based applications.
+    </p>
+
+    <h2>📷 What is Image Recognition?</h2>
+    <p>
+      Image recognition is the process of identifying and detecting an object or feature in a digital image or video. Common applications include:
+    </p>
+    <ul>
+      <li>Face detection</li>
+      <li>Object classification</li>
+      <li>Medical imaging analysis</li>
+      <li>Automated surveillance</li>
+    </ul>
+
+    <h2>🔧 Tools & Libraries Needed</h2>
+    <p>To get started with image recognition in Python, you’ll need the following:</p>
+    <ul>
+      <li><strong>Python</strong> (preferably 3.x)</li>
+      <li><strong>OpenCV</strong> – for image processing</li>
+      <li><strong>TensorFlow or Keras</strong> – for deep learning models</li>
+      <li><strong>NumPy</strong> – for numerical operations</li>
+      <li><strong>Matplotlib</strong> – for image visualization (optional)</li>
+    </ul>
+
+    <h2>⚙️ Installing Required Libraries</h2>
+    <pre><code>pip install opencv-python tensorflow numpy matplotlib</code></pre>
+
+    <h2>📁 Reading and Displaying an Image with OpenCV</h2>
+    <pre><code>import cv2
+import matplotlib.pyplot as plt
+
+# Load an image
+image = cv2.imread('cat.jpg')
+
+# Convert from BGR to RGB for displaying correctly
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+# Display the image
+plt.imshow(image)
+plt.title("Input Image")
+plt.axis('off')
+plt.show()</code></pre>
+
+    <h2>🧠 Using a Pre-trained Model for Recognition</h2>
+    <p>Let’s use a MobileNet model from Keras to classify images:</p>
+    <pre><code>from tensorflow.keras.applications.mobilenet import MobileNet, preprocess_input, decode_predictions
+from tensorflow.keras.preprocessing import image
+import numpy as np
+
+model = MobileNet(weights='imagenet')
+
+img_path = 'cat.jpg'
+img = image.load_img(img_path, target_size=(224, 224))
+x = image.img_to_array(img)
+x = np.expand_dims(x, axis=0)
+x = preprocess_input(x)
+
+preds = model.predict(x)
+print("Predicted:", decode_predictions(preds, top=3)[0])</code></pre>
+
+    <h2>📦 Tips for Beginners</h2>
+    <ul>
+      <li>Start with pre-trained models before building your own.</li>
+      <li>Use Google Colab if you don’t have a GPU.</li>
+      <li>Work with small datasets first to understand the workflow.</li>
+    </ul>
+
+    <h2>🌍 Real-World Applications</h2>
+    <ul>
+      <li>Spam detection in social media content</li>
+      <li>Automated quality checks in manufacturing</li>
+      <li>License plate recognition for parking systems</li>
+    </ul>
+
+    <h2>✅ Conclusion</h2>
+    <p>
+      Image recognition is a valuable skill for any developer interested in AI and computer vision. With tools like OpenCV and TensorFlow, Python makes it incredibly easy to get started. The more you experiment with images and models, the deeper your understanding will grow.
+    </p>
+
+    <p class="author">Written by Usman Fayyaz, Machine Learning Enthusiast & Python Developer</p>
+
+    <footer>
+      &copy; 2025 Usman Fayyaz 
+    </footer>
+  </div>
+</body>
+</html>

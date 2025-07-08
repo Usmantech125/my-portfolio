@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Usman Fayyaz" />
+  <meta name="description" content="Learn how to build a simple university chatbot using Python and Natural Language Processing (NLP)." />
+  <title>Building a University Chatbot Using Python and NLP</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: #34495e;
+      margin-top: 30px;
+    }
+
+    p, li {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    pre {
+      background: #f5f5f5;
+      padding: 15px;
+      border-left: 4px solid #3498db;
+      overflow-x: auto;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .author {
+      margin-top: 40px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Building a University Chatbot Using Python and NLP</h1>
+    <p><strong>Author:</strong> Usman Fayyaz | <strong>Date:</strong> July 8, 2025</p>
+
+    <p>
+      A chatbot can significantly improve communication in a university setting by answering student queries automatically and 24/7. In this blog, we'll explore how to build a simple rule-based chatbot using Python and NLP (Natural Language Processing).
+    </p>
+
+    <h2>🤖 Why Use a University Chatbot?</h2>
+    <ul>
+      <li>Answer frequently asked questions (e.g., admissions, fees, schedule)</li>
+      <li>Reduce workload on staff</li>
+      <li>Provide quick responses to students</li>
+    </ul>
+
+    <h2>🧰 Tools and Libraries Used</h2>
+    <ul>
+      <li><strong>Python</strong> — core language</li>
+      <li><strong>NLTK</strong> — for natural language processing</li>
+      <li><strong>Flask</strong> — to deploy chatbot on the web (optional)</li>
+    </ul>
+
+    <h2>📥 Installation</h2>
+    <pre><code>pip install nltk
+pip install Flask</code></pre>
+
+    <h2>🧠 Step 1: Basic Rule-Based Chatbot with NLTK</h2>
+    <p>We’ll define some responses and use tokenization to process user input.</p>
+
+    <pre><code>import nltk
+from nltk.chat.util import Chat, reflections
+
+pairs = [
+    [r"hi|hello", ["Hello! How can I help you today?"]],
+    [r"what is the admission process", ["You can apply online via the university portal."]],
+    [r"what is the fee structure", ["The fee varies by program. Please visit our official website."]],
+    [r"who is the dean of computer science", ["Prof. Dr. Ahmad is the current dean of CS."]],
+    [r"bye", ["Goodbye! Have a nice day."]]
+]
+
+chatbot = Chat(pairs, reflections)
+chatbot.converse()</code></pre>
+
+    <p>This will launch a command-line chatbot that responds based on pattern matching.</p>
+
+    <h2>🌐 Step 2 (Optional): Deploy with Flask</h2>
+    <pre><code>from flask import Flask, request, jsonify
+import nltk
+from nltk.chat.util import Chat, reflections
+
+app = Flask(__name__)
+chatbot = Chat(pairs, reflections)
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_input = request.json["message"]
+    response = chatbot.respond(user_input)
+    return jsonify({"response": response})
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+
+    <p>This Flask API can be connected to a frontend for a complete web chatbot.</p>
+
+    <h2>✨ Possible Enhancements</h2>
+    <ul>
+      <li>Use machine learning (e.g., scikit-learn or transformers)</li>
+      <li>Connect chatbot to a university database</li>
+      <li>Make it multilingual</li>
+      <li>Deploy on Telegram, WhatsApp, or your university website</li>
+    </ul>
+
+    <h2>✅ Conclusion</h2>
+    <p>
+      A university chatbot is a powerful tool to automate student support. With Python and basic NLP, even a beginner can build and deploy one. As you gain experience, you can enhance your bot using deep learning or integrate with AI models.
+    </p>
+
+    <p class="author">Written by Usman Fayyaz, Python Developer & ML Enthusiast</p>
+
+    <footer>
+      &copy; 2025 Usman Fayyaz 
+    </footer>
+  </div>
+</body>
+</html>

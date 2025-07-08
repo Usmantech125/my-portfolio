@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="A detailed guide on how to deploy machine learning models using FastAPI.">
+  <meta name="author" content="Usman Fayyaz">
+  <title>Deploying Machine Learning Models Using FastAPI | Usman Fayyaz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: #444;
+      margin-top: 30px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #444;
+      margin-top: 25px;
+    }
+
+    p, li {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+
+    pre {
+      background: #f7f7f7;
+      padding: 16px;
+      border-left: 4px solid #4a90e2;
+      overflow-x: auto;
+      font-size: 0.95rem;
+    }
+
+    .author {
+      margin-top: 40px;
+      font-style: italic;
+      color: #555;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <article>
+      <header>
+        <h1>Deploying Machine Learning Models Using FastAPI</h1>
+        <p><strong>Date:</strong> July 8, 2025 | <strong>Author:</strong> Usman Fayyaz</p>
+      </header>
+
+      <section>
+        <p>
+          Deploying a machine learning model is a crucial step in bringing your AI solution to the real world. While model training is important, making it available for users or other systems is equally essential. In this blog, we’ll explore how to deploy ML models using <strong>FastAPI</strong> — a modern, fast web framework for building APIs with Python 3.7+.
+        </p>
+
+        <h2>🔍 Why FastAPI?</h2>
+        <ul>
+          <li>High performance — thanks to Starlette and Pydantic.</li>
+          <li>Asynchronous support using async/await.</li>
+          <li>Automatic interactive documentation via Swagger UI.</li>
+          <li>Easy integration with ML libraries like Scikit-learn, TensorFlow, or PyTorch.</li>
+        </ul>
+
+        <h2>🛠️ Step-by-Step Guide</h2>
+
+        <h3>1. Train and Save Your Model</h3>
+        <p>Let's say you've trained a house price prediction model using <code>scikit-learn</code>.</p>
+
+        <pre><code>from sklearn.linear_model import LinearRegression
+import pandas as pd
+import joblib
+
+# Training dummy model
+data = pd.read_csv("house_data.csv")
+X = data[['area', 'bedrooms']]
+y = data['price']
+
+model = LinearRegression()
+model.fit(X, y)
+
+# Save the model
+joblib.dump(model, "house_price_model.pkl")</code></pre>
+
+        <h3>2. Set Up FastAPI Project</h3>
+        <p>Create a Python file, e.g., <code>main.py</code> and install FastAPI and Uvicorn:</p>
+        <pre><code>pip install fastapi uvicorn joblib</code></pre>
+
+        <h3>3. Create the API Endpoint</h3>
+        <p>Load the model and create a prediction route.</p>
+
+        <pre><code>from fastapi import FastAPI
+from pydantic import BaseModel
+import joblib
+
+# Load model
+model = joblib.load("house_price_model.pkl")
+
+app = FastAPI()
+
+class HouseInput(BaseModel):
+    area: float
+    bedrooms: int
+
+@app.post("/predict")
+def predict_price(data: HouseInput):
+    prediction = model.predict([[data.area, data.bedrooms]])
+    return {"predicted_price": prediction[0]}</code></pre>
+
+        <h3>4. Run the Server</h3>
+        <p>Use Uvicorn to launch the API:</p>
+        <pre><code>uvicorn main:app --reload</code></pre>
+
+        <p>Visit <a href="http://127.0.0.1:8000/docs" target="_blank">http://127.0.0.1:8000/docs</a> to see the interactive API documentation.</p>
+
+        <h3>5. Test Your Model</h3>
+        <p>Use Swagger UI or Postman to send a POST request:</p>
+        <pre><code>{
+  "area": 1500,
+  "bedrooms": 3
+}</code></pre>
+
+        <p>You’ll get a response with the predicted price.</p>
+
+        <h2>🚀 Bonus: Deploying to the Cloud</h2>
+        <p>Once your app works locally, deploy it using:</p>
+        <ul>
+          <li><strong>Render</strong> or <strong>Railway</strong> (simple Git-based deployment)</li>
+          <li><strong>Heroku</strong> (with Procfile)</li>
+          <li><strong>AWS EC2</strong> (for full control)</li>
+          <li><strong>Docker</strong> if you need containers</li>
+        </ul>
+
+        <h2>✅ Conclusion</h2>
+        <p>
+          FastAPI makes deploying ML models simple, fast, and production-ready. You can turn your Jupyter notebook into a fully functional web API within minutes. This is an essential skill for any ML engineer or Python backend developer looking to deliver real-world AI solutions.
+        </p>
+
+        <p class="author">
+          — Written by <strong>Usman Fayyaz</strong>, ML Intern & Python Backend Developer
+        </p>
+      </section>
+
+      <footer>
+        &copy; 2025 Usman Fayyaz | Machine Learning Blog Series
+      </footer>
+    </article>
+  </div>
+</body>
+</html>

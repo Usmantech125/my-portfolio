@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="Usman Fayyaz" />
+  <meta name="description" content="A detailed guide on essential data preprocessing steps for machine learning." />
+  <title>Essential Data Preprocessing for Machine Learning</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fafb;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #2c3e50;
+    }
+    h2 {
+      font-size: 1.5rem;
+      color: #34495e;
+      margin-top: 30px;
+    }
+    p, li {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    pre {
+      background-color: #f3f3f3;
+      padding: 15px;
+      border-left: 5px solid #2980b9;
+      overflow-x: auto;
+    }
+    a {
+      color: #1d72b8;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+    }
+    .author {
+      font-weight: bold;
+      color: #555;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Essential Data Preprocessing for Machine Learning</h1>
+    <p><strong>Author:</strong> Usman Fayyaz | <strong>Date:</strong> July 8, 2025</p>
+
+    <p>
+      Preprocessing is the foundation of any good machine learning model. In this post, we’ll walk through key steps needed before training:
+    </p>
+
+    <h2>✅ Steps Covered</h2>
+    <ul>
+      <li>Handle missing data</li>
+      <li>Encode categorical variables</li>
+      <li>Normalize numerical features</li>
+      <li>Split dataset into training and testing sets</li>
+    </ul>
+
+    <h2>🧪 Sample Code (Python)</h2>
+    <pre><code>import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+
+# Load data
+data = pd.read_csv("data.csv")
+
+# Features and target
+X = data.drop("target", axis=1)
+y = data["target"]
+
+# Column types
+numerical_features = ["age", "salary"]
+categorical_features = ["gender", "education"]
+
+# Pipelines
+numeric_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy="mean")),
+    ('scaler', StandardScaler())
+])
+
+categorical_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy="most_frequent")),
+    ('encoder', OneHotEncoder(handle_unknown="ignore"))
+])
+
+# Combine preprocessors
+preprocessor = ColumnTransformer([
+    ("num", numeric_pipeline, numerical_features),
+    ("cat", categorical_pipeline, categorical_features)
+])
+
+# Preprocess the features
+X_preprocessed = preprocessor.fit_transform(X)
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X_preprocessed, y, test_size=0.2, random_state=42)
+
+print("Preprocessing completed successfully!")</code></pre>
+
+    <h2>🧼 Titanic Dataset Preprocessing Walkthrough</h2>
+    <ol>
+      <li><strong>Loaded Titanic data:</strong> <code>df = pd.read_csv("titanic.csv")</code></li>
+      <li><strong>Checked missing values:</strong> Used <code>df.isnull().sum()</code> to find columns with NaNs.</li>
+      <li><strong>Missing Value Handling:</strong>
+        <ul>
+          <li>Filled <code>Age</code> with its mean.</li>
+          <li>Dropped the <code>Cabin</code> column due to too many nulls.</li>
+          <li>Filled <code>Embarked</code> with the most frequent value.</li>
+        </ul>
+      </li>
+      <li><strong>Encoding:</strong>
+        <ul>
+          <li><code>Sex</code> encoded using <code>LabelEncoder</code>.</li>
+          <li><code>Embarked</code> one-hot encoded via <code>pd.get_dummies()</code>.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>📁 Example GitHub Project</h2>
+    <p>
+      👉 <a href="https://github.com/Usmantech125/Data-Preprocessing-for-Machine-Learning" target="_blank">
+      github.com/Usmantech125/Data-Preprocessing-for-Machine-Learning</a>
+    </p>
+
+    <h2>✅ Conclusion</h2>
+    <p>
+      Good preprocessing ensures your machine learning models perform accurately and efficiently. Always handle missing data, normalize features, and split your dataset properly.
+    </p>
+
+    <p class="author">Written by Usman Fayyaz</p>
+
+    <footer>
+      &copy; 2025 Usman Fayyaz 
+
+    </footer>
+  </div>
+</body>
+</html>
